@@ -1,0 +1,214 @@
+{
+  "global": {
+    "database": {
+      "used": {
+        "db_name": "yss_v1",
+        "db_ip": "pg:5432",
+        "db_type": "postgres",
+        "db_user": "yss_pg",
+        "db_password": "yss123"
+      },
+      "postgres": {
+        "spring.datasource.url": "jdbc:postgresql://<db_ip>/<db_name>",
+        "spring.datasource.username": "<db_user>",
+        "spring.datasource.password": "<db_password>",
+        "spring.datasource.driver-class-name": "org.postgresql.Driver",
+        "spring.jpa.database": "POSTGRESQL",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.PostgreSQL81Dialect",
+        "spring.jpa.properties.hibernate.hbm2ddl.auto": "update"
+      },
+      "mysql": {
+        "spring.datasource.url": "jdbc:mysql://<db_ip>/<db_name>?characterEncoding=utf8&useSSL=true",
+        "spring.datasource.username": "<db_user>",
+        "spring.datasource.password": "<db_password>",
+        "spring.datasource.driver-class-name": "com.mysql.jdbc.Driver",
+        "spring.jpa.database": "MYSQL",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5Dialect",
+        "spring.jpa.properties.hibernate.hbm2ddl.auto": "update"
+      },
+      "oracle": {
+        "spring.datasource.url": "jdbc:oracle:thin:@<db_ip>:<db_name>",
+        "spring.datasource.username": "<db_user>",
+        "spring.datasource.password": "<db_password>",
+        "spring.datasource.driver-class-name": "oracle.jdbc.OracleDriver",
+        "spring.jpa.database": "ORACLE",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.OracleDialect",
+        "spring.jpa.properties.hibernate.hbm2ddl.auto": "update"
+      },
+      "db2": {
+        "spring.datasource.url": "jdbc:db2://<db_ip>/<db_name>",
+        "spring.datasource.username": "<db_user>",
+        "spring.datasource.password": "<db_password>",
+        "spring.datasource.driver-class-name": "com.ibm.db2.jcc.DB2Driver",
+        "spring.jpa.database": "DB2",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.DB2Dialect",
+        "spring.jpa.properties.hibernate.hbm2ddl.auto": "update"
+      }
+    },
+    "kerberos": {
+      "kerberos.jaas.user": "kafka",
+      "kerberos.hadoop.user": "hadoop"
+    },
+    "kafka": {
+      "everisk.kafka.brokers": "kafka:9092",
+      "everisk.kafka.topic-message-decrypt": "yss_message_decrypt",
+      "everisk.kafka.topic-message-encrypt": "yss_message_encrypt",
+      "everisk.kafka.topic-message-intel-center": "yss_message_intel_center",
+      "everisk.kafka.topic-message-receiverupload": "yss_message_receiverupload",
+      "everisk.kafka.topic-message-stat": "yss_message_stat",
+      "everisk.kafka.topic-base-msg": "yss_base_msg",
+      "everisk.kafka.topic-threat-msg": "yss_threat_msg",
+      "everisk.kafka.topic-information": "yss_information",
+      "everisk.kafka.topic-stat-msg": "yss_stat_msg",
+      "everisk.kafka.topic-crash-stack": "yss_crash_stack_analysis",
+      "everisk.kafka.topic-event-safe": "yss_crash_stack_analysis",
+      "everisk.kafka.topic-aograph-msg": "yss_aograph_msg",
+      "everisk.kafka.topic-data-model-statistics": "yss_mode_statistics",
+      "everisk.kafka.topic-dti": "yss_dti",
+      "everisk.kafka.topic-model-msg": "yss_model_msg",
+      "everisk.kafka.kerberos-user": "kafka/kafka"
+    },
+    "elasticsearch": {
+      "everisk.elasticsearch.cluster_name": "yss_es",
+      "everisk.elasticsearch.host_names": "es",
+      "everisk.elasticsearch.port": 9300,
+      "everisk.elasticsearch.restful_port": 9200
+    },
+    "kibana": {
+      "everisk.kibana.host_name": "http://kibana",
+      "everisk.kibana.port": 5601
+    },
+    "redis":  {
+      "redis.host": "redis",
+      "redis.port": 6379,
+      "redis.password": "",
+      "spring.redis.host": "${redis.host}",
+      "spring.redis.port": "${redis.port}",
+      "spring.redis.password": "${redis.password}"
+    },
+    "hbase": {
+      "everisk.hbase.namespace": "default",
+      "everisk.hbase.kerberos-user": "hdfs/hbase"
+    },
+    "hdfs": {
+      "everisk.hdfs.kerberos-user": "hdfs/hdfs"
+    }
+  },
+  "receiver": [
+    {
+      "server.port": 6280,
+      "receiver.kafka.groupid": "groupid_receiver",
+      "receiver.decrypt.strType": "sm4",
+      "receiver.decrypt.compress.switch": 1,
+      "receiver.decrypt.switch": 1,
+      "receiver.ccb.xml.switch": 0,
+      "receiver.ccb.not.open.province.rate": "1,10000000",
+      "receiver.spring.http.multipart.enabled": false,
+      "receiver.stat.message.switch": false,
+      "receiver.yuntu.task.url": "http://172.16.36.135:8080/data-receive/service/task",
+      "receiver.ccb.xml.ip.switch": false,
+      "receiver.ccb.xml.ip.start": "<Aflt_Inf_Dsc>",
+      "receiver.ccb.xml.ip.end": "</Aflt_Inf_Dsc>",
+      "receiver.monitor.request.slow.log.time": 500,
+      "receiver.monitor.redis.slow.log.time": 100,
+      "receiver.msg.report.interval": 12000,
+      "receiver.monitor.data.switch": false,
+      "spring.servlet.multipart.enabled": false
+    }
+  ],
+  "cleaner": {
+    "cleaner.task.pool.core-pool-size": 3,
+    "cleaner.task.pool.max-pool-size": 10,
+    "cleaner.task.pool.queue-capacity": 15,
+    "cleaner.task.pool.keep-alive-seconds": 10,
+    "cleaner.business.mode": "normal",
+    "cleaner.business.self-process-max-cache-count": 9999999,
+    "cleaner.business.active-self-process-counter": false,
+    "cleaner.business.exclude-https-ios": false,
+    "cleaner.business.consumer-group": "cleaners_groupid",
+    "cleaner.topic.read": "${kafka.topic-message-decrypt},${kafka.topic-message-stat}"
+  },
+  "transfer": {
+    "transfer.kafka.groupid-information": "groupid_dataservice",
+    "transfer.kafka.groupid-crash-stack": "groupid_crash_stack",
+    "transfer.kafka.groupid-intelcenter": "groupid_intelcenter",
+    "transfer.kafka.groupid-hdfs": "groupid_hdfs",
+    "transfer.data.local.path": "/bb_home/bb_transfer/transfer/data/",
+    "transfer.data.hdfs.path": "/yss/yss_transfer/data/",
+    "transfer.threat.to.local.write": false,
+    "transfer.threat.local.to.hdfs": false,
+    "transfer.message.to.local.write": false,
+    "transfer.message.local.to.hdfs": false,
+    "transfer.file.local.max.size.mb": 125,
+    "transfer.file.local.max.time.min": 5,
+    "transfer.config.sync.hdfs.path": "/yss/config_sync/",
+    "transfer.crash.stack.switch": false,
+    "transfer.crash.stack.host": "http://crash:3000/crash",
+    "transfer.hdfs.survival.day": 365,
+    "transfer.es.survival.day": 365
+  },
+  "hunter": {
+    "hunter.kafka.groupid.decrypt": "groupid_hunter",
+    "hunter.kafka.auto.offset.reset": "earliest",
+    "hunter.es.message.survival.day": 7
+  },
+  "webservice": {
+    "spring.servlet.multipart.max-file-size": "2048MB",
+    "spring.servlet.multipart.max-request-size": "2048MB",
+    "server.port": 9990,
+    "server.servlet.session.timeout": "365D",
+    "server.servlet.context-path": "/",
+    "systeminfo.path": "/everisk/api/v4/web/",
+    "webservice.iot_system_ip": "172.16.13.4:10086",
+    "webservice.iot_system_webip": "172.16.13.4:8888",
+    "webservice.iot_username": "admin",
+    "webservice.iot_passwd": "123abc",
+    "webservice.need_mssp": false,
+    "webservice.report_dir": "/bb_home/bb_webservice/webService/report",
+    "webservice.email.resful.url": "http://alertserver:9999",
+    "webservice.version": "everisk",
+    "webservice.free.password.user": "secneo",
+    "webservice.two-factor-authentication": false,
+    "webservice.wifi-mac.error": "02:00:00:00:00:00",
+    "webservice.monitor.switch": false,
+    "webservice.app.uninstall":false
+  },
+  "dev": {
+    "dev.kafka.groupid": "groupid_running_distribution",
+    "dev.task.pool.core-pool-size": "4",
+    "dev.task.pool.max-pool-size": "6",
+    "dev.task.pool.queue-capacity": "15",
+    "dev.task.pool.keep-alive-seconds": "10",
+    "dev.topic.read": "${kafka.topic-base-msg},${kafka.topic-stat-msg}"
+  },
+  "alarmservice": {
+    "alarmservice.everisk.web.address": "http://webservice:9990",
+    "alarmservice.email.resful.url": "http://alertserver:9999",
+    "alarmservice.email.file.path": "/bb_home/bb_webservice/data",
+    "alarmservice.kafka.groupid": "groupid_alarm"
+  },
+  "threat": {
+    "threat.task.pool.core-pool-size": 10,
+    "threat.task.pool.keep-alive-seconds": 10,
+    "threat.task.pool.max-pool-size": 10,
+    "threat.task.pool.queue-capacity": 15,
+    "threat.business.percent-min": 0.3,
+    "threat.business.number-of-threads": 1,
+    "threat.business.consumer-group": "groupid_threat",
+    "threat.business.mode": "normal",
+    "threat.business.msg-to-event": true
+  },
+  "dtiProvider": {
+    "everisk.redis.ttl": 3,
+    "everisk.config.zk.namespace-node": "/yss_config/v4.6.0.2/dti",
+    "everisk.kakfa.consumer.groupid": "dti_provider"
+  },
+  "data_model_statistics": {
+    "statistics.business.consumer-group": "mode_statistics",
+    "statistics.business.number-of-threads": 1,
+    "statistics.task.pool.core-pool-size": 10,
+    "statistics.task.pool.keep-alive-seconds": 10,
+    "statistics.task.pool.max-pool-size": 15,
+    "statistics.task.pool.queue-capacity": 15
+  }
+}
